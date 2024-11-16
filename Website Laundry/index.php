@@ -1,8 +1,7 @@
 <?php 
   include 'connect.php';
-  if(isset($_POST['submit'])){
-    session_start();
-    // Grab Admin submitted information
+  session_start();
+  if(isset($_POST['submit'])){  
     $name = mysqli_real_escape_string($mysqli,$_POST["users_name"]);
     $pass = mysqli_real_escape_string($mysqli,$_POST["users_pass"]);
     
@@ -11,23 +10,23 @@
     $row = mysqli_fetch_array($result);
     $cek = mysqli_num_rows($result);
     
-    if($cek>=0){
+    if($cek>0){
       $idnya = $row['id'];
       $level = $row['level'];
       
       if($level == 'admin'){
         $_SESSION['adminweb']=$name;
-        header("Location: admin.php");
+        header("Location: index.php");
       }else if($level == 'employee'){
         $_SESSION['employeeweb']=$name;
-        header("Location: employee.php");
+        header("Location: index.php");
       }else{
         $_SESSION['userweb']=$name;
-        header("Location: user.php");
+        header("Location: index.php");
       }
     }
     else{
-      header("Location: index.php?error=Incorrect Username or Password#login-form");
+      header("Location: index.php?error=Incorrect Username or Password!#login-form");
     }  
   }
 ?>
@@ -82,6 +81,7 @@
           <li><a href="#delivery">Delivery</a></li>
           <li><a href="#login-form">Login</a></li>
           <li><a href="#contact">Contact Us</a></li>
+          <li><?php if (isset($_SESSION['userweb']) || isset($_SESSION['employeeweb']) || isset($_SESSION['adminweb'])) {echo "<a href='logout.php'>Logout</a>";} else {echo "";} ?></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -101,7 +101,20 @@
           <div class="carousel-item active" style="background-image: url('img/intro-carousel/1.jpeg');">
             <div class="carousel-container">
               <div class="carousel-content">
-                <h2>Selamat Datang!</h2>
+                <h2>Selamat Datang <i>
+                <?php 
+                  if (isset($_SESSION['userweb'])) {
+                    echo $_SESSION['userweb'];
+                  } else if (isset($_SESSION['employeeweb'])){
+                    echo $_SESSION['employeeweb'];
+                    echo " employee";
+                  } else if (isset($_SESSION['adminweb'])){
+                    echo $_SESSION['adminweb'];
+                    echo " admin";
+                  } else {
+                    echo "";
+                  } 
+                ?></i>!</h2>
                 <p>Kami di BubbleBrush siap membantu Anda mendapatkan pakaian bersih dan segar dengan layanan laundry berkualitas tinggi. Apakah Anda ingin mencuci, mengeringkan, atau menyetrika? Kami memiliki semua solusi yang Anda butuhkan!</p>
                 <a href="#about" class="btn-get-started scrollto">Cek Layanan</a>
               </div>
@@ -169,7 +182,7 @@
                 <img src="img/cuci-kering.jpeg" alt="" class="img-fluid">
                 <div class="icon"><i class="ion-tshirt-outline"></i></div>
               </div>
-              <h2 class="title"><a href="#">Cuci Kering</a></h2>
+              <h2 class="title"><a href="<?php if (isset($_SESSION['userweb'])) {echo "cucikering.php";} else {echo "#";} ?>">Cuci Kering</a></h2>
               <p>
                 Layanan cuci kering kami adalah pilihan ideal untuk pakaian yang terbuat dari bahan halus dan sensitif, seperti sutra, wol, atau bahan yang mudah rusak. Dengan menggunakan pelarut khusus, kami memastikan pakaian Anda dibersihkan secara efektif tanpa merusak serat. 
               </p>
@@ -286,7 +299,7 @@
                     <input type="password" name="users_pass" class="form-control" id="login-password" placeholder="Password" required />
                   </div>
                   <div class="text-center">
-                    <input class="btn-primary" type="submit" name="submit"></input>
+                    <input class="btn-primary" type="submit" name="submit" value="Login"></input>
                   </div>
                 </form>
               </div>
@@ -300,25 +313,26 @@
                 <header class="section-header text-center">
                   <h3>Register</h3>
                 </header>
-                <form id="registrationForm" action="">
+                <?php if (isset($_GET['hasil'])) { ?>            <p class="hasil"><?php echo $_GET['hasil']; ?></p>        <?php } ?>
+                <form id="registrationForm" action="registrasi.php" method="post">
                   <div class="form-group">
                     <label for="register-username">Username</label>
-                    <input type="text" class="form-control" id="register-username" placeholder="Username" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="email" class="form-control" id="register-email" placeholder="Email" required />
+                    <input type="text" name="username" class="form-control" id="register-username" placeholder="Username" required />
                   </div>
                   <div class="form-group">
                     <label for="register-password">Password</label>
-                    <input type="password" class="form-control" id="register-password" placeholder="Password" required />
+                    <input type="password" name="password" class="form-control" id="register-password" placeholder="Password" required />
                   </div>
                   <div class="form-group">
-                    <label for="register-confirm-password">Confirm Password</label>
-                    <input type="password" class="form-control" id="register-confirm-password" placeholder="Confirm Password" required />
+                    <label for="register-username">Alamat</label>
+                    <input type="text" name="alamat" class="form-control" id="register-username" placeholder="Alamat" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="register-password">Nomor Telepon</label>
+                    <input type="text" name="no_telp" class="form-control" id="register-password" placeholder="Nomor" required />
                   </div>
                   <div class="text-center">
-                    <button class="btn btn-primary" type="submit">Register</button>
+                    <input class="btn-primary" type="submit" name="submit" value="Register"></input>
                   </div>
                 </form>
               </div>
@@ -410,7 +424,7 @@
       <div class="container">
         <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-info">
+          <div class="col-lg-5 col-md-6 footer-info">
             <h3>BubbleBrush</h3>
             <p>Pesan layanan kami secara online dan nikmati kemudahan penjemputan serta pengantaran. Di BubbleBrush, kebersihan dan kepuasan Anda adalah prioritas kami. Bergabunglah dengan kami dan rasakan perbedaan!
 
