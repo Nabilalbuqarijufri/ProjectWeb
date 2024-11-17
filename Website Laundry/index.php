@@ -167,62 +167,66 @@
       Layanan Section
     ============================-->
     <section id="about">
-      <div class="container">
+  <div class="container">
 
-        <header class="section-header">
-          <h3>Layanan</h3>
-          <p>Kami menawarkan berbagai layanan laundry untuk memenuhi kebutuhan kebersihan dan perawatan pakaian Anda. Setiap layanan dirancang untuk memberikan hasil yang optimal dan menjaga kualitas pakaian Anda. Berikut adalah detail layanan kami.</p>
-        </header>
+    <header class="section-header">
+      <h3>Layanan</h3>
+      <p>Kami menawarkan berbagai layanan laundry untuk memenuhi kebutuhan kebersihan dan perawatan pakaian Anda. Setiap layanan dirancang untuk memberikan hasil yang optimal dan menjaga kualitas pakaian Anda. Berikut adalah detail layanan kami.</p>
+    </header>
 
-        <div class="row about-cols">
+    <div class="row about-cols">
 
-          <div class="col-md-4 wow fadeInUp">
-            <div class="about-col">
-              <div class="img">
-                <img src="img/cuci-kering.jpeg" alt="" class="img-fluid">
-                <div class="icon"><i class="ion-tshirt-outline"></i></div>
-              </div>
-              <h2 class="title"><a href="<?php if (isset($_SESSION['userweb'])) {echo "cucikering.php";} else {echo "#";} ?>">Cuci Kering</a></h2>
-              <p>
-                Layanan cuci kering kami adalah pilihan ideal untuk pakaian yang terbuat dari bahan halus dan sensitif, seperti sutra, wol, atau bahan yang mudah rusak. Dengan menggunakan pelarut khusus, kami memastikan pakaian Anda dibersihkan secara efektif tanpa merusak serat. 
-              </p>
-            </div>
+      <!-- Layanan Cuci Kering -->
+      <div class="col-md-4 wow fadeInUp">
+        <div class="about-col">
+          <div class="img">
+            <img src="img/cuci-kering.jpeg" alt="" class="img-fluid">
+            <div class="icon"><i class="ion-tshirt-outline"></i></div>
           </div>
-
-          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="about-col">
-              <div class="img">
-                <img src="img/cuci-setrika.jpeg" alt="" class="img-fluid">
-                <div class="icon"><i class="ion-ios-eye-outline"></i></div>
-              </div>
-              <h2 class="title"><a href="#">Cuci Setrika</a></h2>
-              <p>
-                Kami menawarkan layanan cuci setrika yang menyeluruh. Pakaian dicuci bersih dan disetrika rapi, bebas kerutan, sehingga siap digunakan dalam berbagai kesempatan dengan penampilan yang profesional dan menarik., bersih, dan siap dikenakan untuk setiap kesempatan.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="about-col">
-              <div class="img">
-                <img src="img/cuci-pengharum.jpg" alt="" class="img-fluid">
-                <div class="icon"><i class="ion-ios-flask"></i></div>
-              </div>
-              <h2 class="title"><a href="#">Cuci Pengharum</a></h2>
-              <p>
-                Cuci pengharum kami memberikan kesegaran ekstra pada pakaian Anda. Selain mencuci dengan cermat, kami menggunakan pengharum yang menyenangkan untuk memberikan aroma tahan lama dan pengalaman menyenangkan saat mengenakan pakaian.
-              </p>
-            </div>
-          </div>
-
+          <h2 class="title">
+            <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=cuci_kering&harga=5000' : '#'; ?>">Cuci Kering</a>
+          </h2>
+          <p>
+            Layanan cuci kering kami adalah pilihan ideal untuk pakaian yang terbuat dari bahan halus dan sensitif, seperti sutra, wol, atau bahan yang mudah rusak. Dengan menggunakan pelarut khusus, kami memastikan pakaian Anda dibersihkan secara efektif tanpa merusak serat. 
+          </p>
         </div>
-
       </div>
-    </section><!-- #about -->
 
-    <!--==========================
-      Delivery Section
-    ============================-->
+      <!-- Layanan Cuci Setrika -->
+      <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="about-col">
+          <div class="img">
+            <img src="img/cuci-setrika.jpeg" alt="" class="img-fluid">
+            <div class="icon"><i class="ion-ios-eye-outline"></i></div>
+          </div>
+          <h2 class="title">
+            <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=cuci_setrika&harga=7000' : '#'; ?>">Cuci Setrika</a>
+          </h2>
+          <p>
+            Kami menawarkan layanan cuci setrika yang menyeluruh. Pakaian dicuci bersih dan disetrika rapi, bebas kerutan, sehingga siap digunakan dalam berbagai kesempatan dengan penampilan yang profesional dan menarik.
+          </p>
+        </div>
+      </div>
+
+      <!-- Layanan Cuci Pengharum -->
+      <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+        <div class="about-col">
+          <div class="img">
+            <img src="img/cuci-pengharum.jpg" alt="" class="img-fluid">
+            <div class="icon"><i class="ion-ios-flask"></i></div>
+          </div>
+          <h2 class="title">
+            <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=cuci_pengharum&harga=9000' : '#'; ?>">Cuci Pengharum</a>
+          </h2>
+          <p>
+            Cuci pengharum kami memberikan kesegaran ekstra pada pakaian Anda. Selain mencuci dengan cermat, kami menggunakan pengharum yang menyenangkan untuk memberikan aroma tahan lama dan pengalaman menyenangkan saat mengenakan pakaian.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
     <section id="delivery">
       <div class="container">
 
