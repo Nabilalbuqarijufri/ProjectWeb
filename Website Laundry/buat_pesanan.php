@@ -2,13 +2,15 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validasi data POST
     $layanan = isset($_POST['layanan']) ? $_POST['layanan'] : null;
+    $delivery = isset($_POST['delivery']) ? $_POST['delivery'] : null;
     $harga_per_kg = isset($_POST['harga_per_kg']) ? $_POST['harga_per_kg'] : null;
     $berat = isset($_POST['berat']) ? $_POST['berat'] : null;
     $metode_pembayaran = isset($_POST['metode_pembayaran']) ? $_POST['metode_pembayaran'] : null;
 
-    if (!$layanan || !$harga_per_kg || !$berat || !$metode_pembayaran) {
-        die('<h1>Data tidak lengkap!</h1><p>Mohon lengkapi formulir.</p>');
-    }
+    if (!$layanan || !$harga_per_kg || !$berat || !$metode_pembayaran || !$delivery) {
+      die('<h1>Data tidak lengkap!</h1><p>Mohon lengkapi formulir.</p>');
+  }
+  
 
     // Hitung total
     $total = $berat * $harga_per_kg;
@@ -21,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $filename = "$folder/pesanan_" . time() . ".txt";
     $content = "Layanan: $layanan\nBerat: $berat kg\nHarga per kg: Rp $harga_per_kg\nTotal: Rp $total\nMetode Pembayaran: $metode_pembayaran";
     file_put_contents($filename, $content);
+    
 
     // Tampilkan detail pesanan
    echo "<div class='detail-container'>
@@ -35,11 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td>1</td>
                 <td>LAYANAN</td>
                 <td>$layanan</td>
+
             </tr>
             <tr>
                 <td>2</td>
                 <td>DELIVERY</td>
-                <td>ANTAR JEMPUT</td>
+                <td>$delivery</td>
             </tr>
             <tr>
                 <td>3</td>
@@ -104,20 +108,58 @@ $harga_per_kg = isset($_GET['harga']) ? $_GET['harga'] : 0;
       color: #007BFF;
       text-align: center;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    table th, table td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-    table th {
-      background-color: #007BFF;
-      color: white;
-    }
+    table{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+  }
+  .detail-container {
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  h2 {
+    color: #007BFF;
+    text-align: center;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  table th {
+    background-color: #007BFF;
+    color: white;
+  }
+  .btn-back {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  .btn-back:hover {
+    background-color: #0056b3;
+  }
     .btn-back, .btn-submit {
       display: inline-block;
       background-color: #007BFF;
@@ -170,17 +212,17 @@ $harga_per_kg = isset($_GET['harga']) ? $_GET['harga'] : 0;
       <h3>Delivery</h3>
       <div class="delivery-options">
         <label>
-          <input type="radio" name="layanan" value="Antar" required>
+        <input type="radio" name="delivery" value="Antar" required>
           <img src="img/antar.jpeg" alt="Antar">
           <br>Antar
         </label>
         <label>
-          <input type="radio" name="layanan" value="Antar Jemput">
+        <input type="radio" name="delivery" value="Antar Jemput">
           <img src="img/antar-jemput.jpeg" alt="Antar Jemput">
           <br>Antar Jemput
         </label>
         <label>
-          <input type="radio" name="layanan" value="Jemput">
+        <input type="radio" name="delivery" value="Jemput">
           <img src="img/jemput.jpeg" alt="Jemput">
           <br>Jemput
         </label>

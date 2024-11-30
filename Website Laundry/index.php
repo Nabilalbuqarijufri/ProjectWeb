@@ -78,7 +78,6 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="#intro">Home</a></li>
           <li><a href="#about">Layanan</a></li>
-          <li><a href="#delivery">Delivery</a></li>
           <li><a href="#login-form">Login</a></li>
           <li><a href="#contact">Contact Us</a></li>
           <li><?php if (isset($_SESSION['userweb']) || isset($_SESSION['employeeweb']) || isset($_SESSION['adminweb'])) {echo "<a href='logout.php'>Logout</a>";} else {echo "";} ?></li>
@@ -166,6 +165,22 @@
     <!--==========================
       Layanan Section
     ============================-->
+    <h2>Layanan Laundry</h2>
+    <form method="POST" action="proses_laundry.php">
+        <label for="layanan">Pilih Layanan:</label>
+        <select name="layanan" id="layanan" required>
+            <option value="cuci_kering">Cuci + kering</option>
+            <option value="cuci_setrika">Cuci + Setrika</option>
+            <option value="cuci_pengharum">Cuci + pengharum</option>
+        </select>
+        <br>
+
+        <label for="delivery">Butuh Pengantaran?</label>
+        <select name="delivery" id="delivery" required>
+            <option value="ya">Ya</option>
+            <option value="tidak">Tidak</option>
+        </select>
+        <br>
     <section id="about">
   <div class="container">
 
@@ -227,59 +242,6 @@
     </div>
   </div>
 </section>
-    <section id="delivery">
-      <div class="container">
-
-        <header class="section-header">
-          <h3>Delivery</h3>
-          <p>Nikmati kemudahan dengan layanan delivery laundry kami! Kami memahami bahwa kesibukan sehari-hari bisa membuat waktu Anda terbatas. Oleh karena itu, kami hadir dengan solusi praktis untuk memastikan pakaian Anda tetap bersih dan terawat tanpa harus mengganggu rutinitas Anda.</p>
-        </header>
-
-        <div class="row delivery-cols">
-
-          <div class="col-md-4 wow fadeInUp">
-            <div class="delivery-col">
-              <div class="img">
-                <img src="img/jemput.jpeg" alt="" class="img-fluid">
-                <div class="icon"><i class="ion-android-bicycle"></i></div>
-              </div>
-              <h2 class="title"><a href="#">Antar</a></h2>
-              <p>
-                Setelah proses laundry selesai, kami akan mengantarkan pakaian Anda kembali ke rumah dengan aman dan rapi. Dengan layanan kami, Anda bisa lebih fokus pada aktivitas sehari-hari tanpa khawatir tentang kebersihan pakaian Anda.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="delivery-col">
-              <div class="img">
-                <img src="img/antar-jemput.jpeg" alt="" class="img-fluid">
-                <div class="icon"><i class="ion-android-car"></i></div>
-              </div>
-              <h2 class="title"><a href="#">Antar Jemput</a></h2>
-              <p>
-                Sambut kenyamanan dengan layanan antar jemput laundry kami! Kami mengerti betapa berharganya waktu Anda, dan kami berkomitmen untuk memberikan solusi praktis bagi kebutuhan laundry Anda. Dengan layanan antar jemput kami, Anda dapat menikmati kebersihan pakaian tanpa harus keluar rumah.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
-            <div class="delivery-col">
-              <div class="img">
-                <img src="img/antar.jpeg" alt="" class="img-fluid">
-                <div class="icon"><i class="ion-android-bicycle"></i></div>
-              </div>
-              <h2 class="title"><a href="#">Jemput</a></h2>
-              <p>
-                Nikmati kemudahan dan kenyamanan dengan layanan jemput laundry kami! Kami memahami bahwa waktu Anda sangat berharga Dengan layanan jemput laundry, Anda tidak perlu lagi repot-repot membawa pakaian kotor ke tempat laundry.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- #delivery -->
 
     <section id="login-form">
       <div class="container mt-5">
