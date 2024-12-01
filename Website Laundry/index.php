@@ -1,6 +1,7 @@
 <?php 
   include 'connect.php';
   session_start();
+  //$alertMessage = isset($_GET['alert']) ? htmlspecialchars($_GET['alert']) : '';
   if(isset($_POST['submit'])){  
     $name = mysqli_real_escape_string($mysqli,$_POST["users_name"]);
     $pass = mysqli_real_escape_string($mysqli,$_POST["users_pass"]);
@@ -59,6 +60,15 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
+  <!-- <script>
+        // Show an alert if the message is not empty
+        window.onload = function() {
+            const alertMessage = "<?php //echo $alertMessage; ?>";
+            if (alertMessage) {
+                alert(alertMessage);
+            }
+        };
+  </script> -->
 </head>
 <body>
 
@@ -76,9 +86,9 @@
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="#intro">Home</a></li>
+          <li class="menu-active"><a href="index.php">Home</a></li>
           <li><a href="#about">Layanan</a></li>
-          <li><a href="#login-form">Login</a></li>
+          <li><?php if (isset($_SESSION['userweb']) || isset($_SESSION['employeeweb']) || isset($_SESSION['adminweb'])) {echo "";} else {echo "<a href='#login-form'>Login</a>";} ?></li>
           <li><a href="#contact">Contact Us</a></li>
           <li><?php if (isset($_SESSION['userweb']) || isset($_SESSION['employeeweb']) || isset($_SESSION['adminweb'])) {echo "<a href='logout.php'>Logout</a>";} else {echo "";} ?></li>
         </ul>
@@ -165,22 +175,6 @@
     <!--==========================
       Layanan Section
     ============================-->
-    <h2>Layanan Laundry</h2>
-    <form method="POST" action="proses_laundry.php">
-        <label for="layanan">Pilih Layanan:</label>
-        <select name="layanan" id="layanan" required>
-            <option value="cuci_kering">Cuci + kering</option>
-            <option value="cuci_setrika">Cuci + Setrika</option>
-            <option value="cuci_pengharum">Cuci + pengharum</option>
-        </select>
-        <br>
-
-        <label for="delivery">Butuh Pengantaran?</label>
-        <select name="delivery" id="delivery" required>
-            <option value="ya">Ya</option>
-            <option value="tidak">Tidak</option>
-        </select>
-        <br>
     <section id="about">
   <div class="container">
 
@@ -194,13 +188,15 @@
       <!-- Layanan Cuci Kering -->
       <div class="col-md-4 wow fadeInUp">
         <div class="about-col">
-          <div class="img">
-            <img src="img/cuci-kering.jpeg" alt="" class="img-fluid">
-            <div class="icon"><i class="ion-tshirt-outline"></i></div>
-          </div>
-          <h2 class="title">
-            <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=cuci_kering&harga=5000' : '#'; ?>">Cuci Kering</a>
-          </h2>
+          <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=Cuci Kering&harga=5000' : '#'; ?>">
+            <div class="img">
+              <img src="img/cuci-kering.jpeg" alt="" class="img-fluid">
+              <div class="icon"><i class="ion-tshirt-outline"></i></div>
+            </div>
+            <h2 class="title">
+              Cuci Kering
+            </h2>
+          </a>
           <p>
             Layanan cuci kering kami adalah pilihan ideal untuk pakaian yang terbuat dari bahan halus dan sensitif, seperti sutra, wol, atau bahan yang mudah rusak. Dengan menggunakan pelarut khusus, kami memastikan pakaian Anda dibersihkan secara efektif tanpa merusak serat. 
           </p>
@@ -210,13 +206,15 @@
       <!-- Layanan Cuci Setrika -->
       <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
         <div class="about-col">
-          <div class="img">
-            <img src="img/cuci-setrika.jpeg" alt="" class="img-fluid">
-            <div class="icon"><i class="ion-ios-eye-outline"></i></div>
-          </div>
-          <h2 class="title">
-            <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=cuci_setrika&harga=7000' : '#'; ?>">Cuci Setrika</a>
-          </h2>
+          <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=Cuci Setrika&harga=7000' : '#'; ?>">
+            <div class="img">
+              <img src="img/cuci-setrika.jpeg" alt="" class="img-fluid">
+              <div class="icon"><i class="ion-ios-eye-outline"></i></div>
+            </div>
+            <h2 class="title">
+              Cuci Setrika
+            </h2>
+          </a>
           <p>
             Kami menawarkan layanan cuci setrika yang menyeluruh. Pakaian dicuci bersih dan disetrika rapi, bebas kerutan, sehingga siap digunakan dalam berbagai kesempatan dengan penampilan yang profesional dan menarik.
           </p>
@@ -226,13 +224,15 @@
       <!-- Layanan Cuci Pengharum -->
       <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
         <div class="about-col">
-          <div class="img">
-            <img src="img/cuci-pengharum.jpg" alt="" class="img-fluid">
-            <div class="icon"><i class="ion-ios-flask"></i></div>
-          </div>
-          <h2 class="title">
-            <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=cuci_pengharum&harga=9000' : '#'; ?>">Cuci Pengharum</a>
-          </h2>
+          <a href="<?php echo isset($_SESSION['userweb']) ? 'buat_pesanan.php?layanan=Cuci Pengharum&harga=9000' : '#'; ?>">
+            <div class="img">
+              <img src="img/cuci-pengharum.jpg" alt="" class="img-fluid">
+              <div class="icon"><i class="ion-ios-flask"></i></div>
+            </div>
+            <h2 class="title">
+              Cuci Pengharum
+            </h2>
+          </a>
           <p>
             Cuci pengharum kami memberikan kesegaran ekstra pada pakaian Anda. Selain mencuci dengan cermat, kami menggunakan pengharum yang menyenangkan untuk memberikan aroma tahan lama dan pengalaman menyenangkan saat mengenakan pakaian.
           </p>

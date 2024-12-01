@@ -1,4 +1,6 @@
 <?php
+include 'connect.php';
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validasi data POST
     $layanan = isset($_POST['layanan']) ? $_POST['layanan'] : null;
@@ -9,67 +11,69 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!$layanan || !$harga_per_kg || !$berat || !$metode_pembayaran || !$delivery) {
       die('<h1>Data tidak lengkap!</h1><p>Mohon lengkapi formulir.</p>');
-  }
+    }
   
 
     // Hitung total
     $total = $berat * $harga_per_kg;
 
-    // Simpan info pesanan
-    $folder = 'pesanan';
-    if (!is_dir($folder)) {
-        mkdir($folder, 0777, true);
-    }
-    $filename = "$folder/pesanan_" . time() . ".txt";
-    $content = "Layanan: $layanan\nBerat: $berat kg\nHarga per kg: Rp $harga_per_kg\nTotal: Rp $total\nMetode Pembayaran: $metode_pembayaran";
-    file_put_contents($filename, $content);
-    
+    $siapa = $_SESSION['userweb']; 
 
     // Tampilkan detail pesanan
-   echo "<div class='detail-container'>
-        <h2>DETAIL PESANAN</h2>
-        <table>
-            <tr>
-                <th>NO</th>
-                <th>PESANAN</th>
-                <th>HASIL</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>LAYANAN</td>
-                <td>$layanan</td>
-
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>DELIVERY</td>
-                <td>$delivery</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>BERAT</td>
-                <td>$berat KG</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>HARGA/KG</td>
-                <td>Rp " . number_format($harga_per_kg, 0, ',', '.') . "</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>TOTAL</td>
-                <td>Rp " . number_format($total, 0, ',', '.') . "</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>METODE PEMBAYARAN</td>
-                <td>$metode_pembayaran</td>
-            </tr>
-        </table>
-        <br>
-        <a href='index.php' class='btn-back'>Kembali ke Home</a>
-      </div>";
-
+   echo "<!DOCTYPE html>
+   <html>
+   <head>
+   <link rel='stylesheet' href='css/style-pesanan.css'>
+   <link rel='preconnect' href='https://fonts.googleapis.com'>
+   <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+   <link href='https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap' rel='stylesheet'>
+   </head>
+     <body>
+       <div class='detail-container'>
+              <h2>DETAIL PESANAN $siapa</h2>
+              <table>
+                  <tr>
+                      <th>NO</th>
+                      <th>PESANAN</th>
+                      <th>HASIL</th>
+                  </tr>
+                  <tr>
+                      <td>1</td>
+                      <td>LAYANAN</td>
+                      <td>$layanan</td>
+                  </tr>
+                  <tr>
+                      <td>2</td>
+                      <td>DELIVERY</td>
+                      <td>$delivery</td>
+                  </tr>
+                  <tr>
+                      <td>3</td>
+                      <td>BERAT</td>
+                      <td>$berat KG</td>
+                  </tr>
+                  <tr>
+                      <td>4</td>
+                      <td>HARGA/KG</td>
+                      <td>Rp " . number_format($harga_per_kg, 0, ',', '.') . "</td>
+                  </tr>
+                  <tr>
+                      <td>5</td>
+                      <td>TOTAL</td>
+                      <td>Rp " . number_format($total, 0, ',', '.') . "</td>
+                  </tr>
+                  <tr>
+                      <td>6</td>
+                      <td>METODE PEMBAYARAN</td>
+                      <td>$metode_pembayaran</td>
+                  </tr>
+              </table>
+              <br>
+              <a href='buat_pesanan.php?layanan=$layanan&harga=$harga_per_kg' class='btn-back'>Kembali</a>
+              <a href='tambah_pesanan.php?siapa=$siapa&layanan=$layanan&delivery=$delivery&total=$total&metode_pembayaran=$metode_pembayaran&berat=$berat&harga_per_kg=$harga_per_kg' class='btn-back'>Tambahkan Pesanan</a>
+            </div>
+     </body>
+   </html>";
 
     exit;
 }
@@ -77,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Default nilai
 $layanan = isset($_GET['layanan']) ? $_GET['layanan'] : 'default';
 $harga_per_kg = isset($_GET['harga']) ? $_GET['harga'] : 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -85,127 +90,20 @@ $harga_per_kg = isset($_GET['harga']) ? $_GET['harga'] : 0;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buat Pesanan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #f9f9f9;
-    }
-    .form-container, .detail-container {
-      width: 100%;
-      max-width: 600px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background-color: white;
-    }
-    h2 {
-      color: #007BFF;
-      text-align: center;
-    }
-    table{
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-  }
-  .detail-container {
-    width: 100%;
-    max-width: 600px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: white;
-  }
-  h2 {
-    color: #007BFF;
-    text-align: center;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  table th {
-    background-color: #007BFF;
-    color: white;
-  }
-  .btn-back {
-    display: inline-block;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border: none;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  .btn-back:hover {
-    background-color: #0056b3;
-  }
-    .btn-back, .btn-submit {
-      display: inline-block;
-      background-color: #007BFF;
-      color: white;
-      text-decoration: none;
-      border: none;
-      padding: 10px;
-      text-align: center;
-      width: 100%;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .btn-back:hover, .btn-submit:hover {
-      background-color: #0056b3;
-    }
-    .delivery-options, .payment-options {
-      display: flex;
-      justify-content: space-around;
-      margin: 20px 0;
-    }
-    .delivery-options label, .payment-options label {
-      text-align: center;
-    }
-    .delivery-options img, .payment-options img {
-      width: 100px;
-      border-radius: 10px;
-    }
-    input[type="radio"] {
-      display: none;
-    }
-    input[type="radio"]:checked + img {
-      border: 2px solid #007BFF;
-    }
-    
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style-pesanan.css">
 </head>
 <body>
   <div class="form-container">
-    <h2>Buat Pesanan</h2>
-    <form method="post">
+    <h2>Buat Pesanan <?php echo $layanan; ?></h2>
+    <form action="buat_pesanan.php" method="post">
       <input type="hidden" name="layanan" value="<?= $layanan ?>">
       <input type="hidden" name="harga_per_kg" value="<?= $harga_per_kg ?>">
 
       <!-- Input Berat -->
-      <label for="berat">Masukkan Berat (Kg):</label>
+      <label for="berat">Masukkan Berat Cucian Anda (Kg):</label>
       <input type="number" id="berat" name="berat" placeholder="0" step="0.01" required>
 
       <!-- Delivery Options -->
@@ -254,7 +152,7 @@ $harga_per_kg = isset($_GET['harga']) ? $_GET['harga'] : 0;
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="btn-submit">Buat Pesanan</button>
+      <input class="btn-submit" type="submit" name="submit" value="Buat Pesanan" /> 
     </form>
   </div>
 </body>
