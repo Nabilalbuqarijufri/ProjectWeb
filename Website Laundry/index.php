@@ -17,10 +17,10 @@
       
       if($level == 'admin'){
         $_SESSION['adminweb']=$name;
-        header("Location: index.php");
+        header("Location: admin.php");
       }else if($level == 'employee'){
         $_SESSION['employeeweb']=$name;
-        header("Location: index.php");
+        header("Location: employee.php");
       }else{
         $_SESSION['userweb']=$name;
         header("Location: index.php");
@@ -114,12 +114,6 @@
                 <?php 
                   if (isset($_SESSION['userweb'])) {
                     echo $_SESSION['userweb'];
-                  } else if (isset($_SESSION['employeeweb'])){
-                    echo $_SESSION['employeeweb'];
-                    echo " employee";
-                  } else if (isset($_SESSION['adminweb'])){
-                    echo $_SESSION['adminweb'];
-                    echo " admin";
                   } else {
                     echo "";
                   } 
