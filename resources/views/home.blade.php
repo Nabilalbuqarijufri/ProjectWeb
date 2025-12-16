@@ -2,7 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
 
     {{-- Navbar --}}
-    <nav class="flex items-center bg-black text-white p-4 justify-between">
+    <nav class="flex items-center bg-black text-white p-4 justify-between sticky top-0 z-50">
         <a href="/" class="text-2xl font-bold">BubbleBrush</a>
         <div class="flex gap-4">
             <a href="/" class="">Home</a>
@@ -15,26 +15,26 @@
     </nav>
     
     {{-- Header --}}
-    <header class="text-center">
+    <header class="text-center my-48">
         <h1 class="text-3xl">Welcome to BubbleBrush!</h1>
         <p class="text-base">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores, modi!</p>
     </header>
     
     {{-- About Section --}}
-    <section id="about" class="text-center">
+    <section id="about" class="text-center my-48">
         <h1 class="text-3xl">About Us</h1>
         <p class="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, veritatis?</p>
     </section>
     
     {{-- Layanan Section --}}
-    <section id="layanan" class="text-center">
+    <section id="layanan" class="text-center my-48">
         <h1 class="text-3xl">Layanan</h1>
         <p class="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, molestias.</p>
     </section>
     
-    {{-- Contact Form --}}
-    <section id="contact" class="text-center">
-        <h1 class="text-3xl">Contact</h1>
+    {{-- Contact Section --}}
+    <section id="contact" class="text-center my-48">
+        <h1 class="text-3xl">Contact Us</h1>
         <p class="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, nam?</p>
     </section>
     
