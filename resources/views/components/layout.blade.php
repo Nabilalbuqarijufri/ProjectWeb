@@ -20,7 +20,7 @@
         </style>
     @endif
 </head>
-<body>
+<body class="bg-gray-200">
     {{ $slot }}
 </body>
 </html>
