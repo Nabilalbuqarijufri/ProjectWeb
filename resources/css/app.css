@@ -33,11 +33,4 @@
         outline: none;
         box-shadow: var(--ring);
     }
-
-    .nav-link[aria-current="page"],
-    .nav-link.active {
-        background-color: var(--color-violet-500);
-        color: var(--color-white);
-        box-shadow: var(--shadow-md);
-    }
 }
