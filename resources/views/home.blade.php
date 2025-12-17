@@ -5,12 +5,12 @@
     <nav class="flex items-center bg-black text-white p-4 justify-between sticky top-0 z-50">
         <a href="/" class="text-2xl font-bold">BubbleBrush</a>
         <div class="flex gap-4">
-            <a href="/" class="">Home</a>
-            <a href="#about" class="">About</a>
-            <a href="#layanan" class="">Layanan</a>
-            <a href="#contact" class="">Contact</a>
-            <a href="/login" class="">Sign In</a>
-            <a href="/register" class="">Sign Up</a>
+            <a href="/" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#layanan" class="nav-link">Layanan</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <a href="/login" class="nav-link">Sign In</a>
+            <a href="/register" class="nav-link">Sign Up</a>
         </div>
     </nav>
     
