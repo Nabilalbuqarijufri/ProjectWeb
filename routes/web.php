@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 // Register Routes
-Route::view('/register', 'register', ['title' => 'Register Page'])
+Route::view('/register', 'auth.register', ['title' => 'Register Page'])
     ->middleware('guest')
     ->name('register');
 
@@ -18,7 +18,7 @@ Route::post('/register', Register::class)
     ->middleware('guest');
 
 // Login Route
-Route::view('/login', 'login', ['title' => 'Login Page'])
+Route::view('/login', 'auth.login', ['title' => 'Login Page'])
     ->middleware('guest')
     ->name('login');
 
