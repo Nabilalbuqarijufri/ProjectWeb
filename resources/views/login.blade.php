@@ -13,7 +13,7 @@
 
             <h1 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center">Welcome back</h1>
 
-            <form action="" method="post" class="space-y-5">
+            <form action="/login" method="post" class="space-y-5">
                 @csrf
 
                 <div>
@@ -22,6 +22,7 @@
                         id="email"
                         name="email"
                         type="email"
+                        placeholder="username@example.com"
                         value="{{ old('email') }}"
                         required
                         autofocus
@@ -36,6 +37,7 @@
                         id="password"
                         name="password"
                         type="password"
+                        placeholder="••••••••"
                         required
                         class="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-3 py-2 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                     >
