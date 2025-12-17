@@ -26,6 +26,7 @@
     .nav-link:hover {
         @media (hover: hover) {
             color: var(--color-violet-500);
+            text-decoration: underline;
         }
     }
 
